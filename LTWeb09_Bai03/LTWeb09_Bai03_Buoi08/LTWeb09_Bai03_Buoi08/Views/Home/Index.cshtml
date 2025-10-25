@@ -1,0 +1,39 @@
+﻿@model List<LTWeb09_Bai03_Buoi08.Models.Employee>
+<h2>DANH SÁCH NHÂN VIÊN</h2>
+<p>
+    @Html.ActionLink("Thêm mới", "ThemMoi", null,new { @class = "btn btn-sm btn-outline-info me-1" })
+</p>
+<table class="table table-bordered table-striped" >
+    <tr>
+        <th>Mã NV</th>
+        <th>Họ và Tên</th>
+        <th>Giới Tính</th>
+        <th>Thành Phố</th>
+        <th>Ảnh</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+            <td>@Html.DisplayFor(modelItem => item.City)</td>
+            <td>
+                @{
+                    var imagePath = item.Img ?? "~/Content/images/1.png";
+                }
+
+                <img src="@Url.Content(imagePath)" style="width: 50px; height: auto;" alt="@item.Name" />
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Home", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-primary me-1" })
+                @Html.ActionLink("Details", "Details", "Home", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-secondary me-1" })
+                @Html.ActionLink("Delete", "Delete", "Home", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+            </td>
+    </tr>
+}
+</table>

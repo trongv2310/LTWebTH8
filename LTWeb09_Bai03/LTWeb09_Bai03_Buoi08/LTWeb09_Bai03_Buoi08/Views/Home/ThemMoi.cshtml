@@ -1,0 +1,63 @@
+﻿@model LTWeb09_Bai03_Buoi08.Models.Employee
+@{
+    ViewBag.Title = "ThemMoi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ThemMoi</h2>
+
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <label>Id</label>
+        <input type="number" name="Id" value="" required />
+    </div>
+
+    <div>
+        <label>Name</label>
+        <input type="text" name="Name" value="" required />
+    </div>
+
+    <div>
+        <label>Gender</label>
+        <select name="Gender" required>
+            <option value="">-- Chọn giới tính --</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+        </select>
+    </div>
+
+    <div>
+        <label>City</label>
+        <input type="text" name="City" value="" required />
+    </div>
+
+    <div>
+        <label>DeptId</label>
+        @Html.DropDownList("DeptId", (SelectList)ViewBag.DeptId, "-- Chọn phòng ban --", new { required = "required" })
+    </div>
+
+    <div>
+        <label>Image</label>
+        <input type="file" name="ImageFile" accept=".jpg,.jpeg,.png,.gif" />
+        @Html.ValidationMessage("Img")
+    </div>
+
+    <br />
+
+    <div>
+        <input type="submit" value="Tạo mới" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}

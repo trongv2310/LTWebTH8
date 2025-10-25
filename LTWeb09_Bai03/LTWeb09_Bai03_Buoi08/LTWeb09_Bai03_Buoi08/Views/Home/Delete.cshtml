@@ -1,0 +1,40 @@
+﻿@model LTWeb09_Bai03_Buoi08.Models.Employee
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Delete</h2>
+
+<h3>Bạn có chắc muốn xóa nhân viên này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt>Department</dt>
+        <dd>@Html.DisplayFor(model => model.Department.Name)</dd>
+
+        <dt>Image</dt>
+        <dd>
+            @{
+                var imagePath = Model.Img ?? "~/Content/Images/nham.png";
+            }
+            <img src="@Url.Content(imagePath)" style="width: 100px; height: auto;" />
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id) 
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
