@@ -1,0 +1,82 @@
+﻿@model LTWeb08_Bai02.Models.SACH
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SACH</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CHUDE.TenChuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHUDE.TenChuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NHAXUATBAN.TenNXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHAXUATBAN.TenNXB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhBia)
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.AnhBia)" alt="Alternate Text" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongTon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSach }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
