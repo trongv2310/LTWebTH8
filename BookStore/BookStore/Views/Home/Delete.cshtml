@@ -1,0 +1,35 @@
+﻿@model BookStore.Models.Theloaitin
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Xoa</h2>
+<form action="/Home/Delete?id=@Model.IDLoai" method="POST">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Theloaitin</legend>
+        <div class="editor-label">
+            Ma The Loai
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDLoai)
+            @Html.ValidationMessageFor(model => model.IDLoai)
+        </div>
+        <div class="editor-label">
+            Ten The Loai
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tentheloai)
+            @Html.ValidationMessageFor(model => model.Tentheloai)
+        </div>
+
+        <p>
+            <input type="submit" value="Delete" />
+        </p>
+    </fieldset>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tintuc">
+    <Key>
+      <PropertyRef Name="IdTin" />
+    </Key>
+    <Property Name="IdTin" Type="int" Nullable="false" />
+    <Property Name="IDLoai" Type="int" />
+    <Property Name="Tieudetin" Type="nvarchar" MaxLength="100" />
+    <Property Name="Noidungtin" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Theloaitin">
+    <Key>
+      <PropertyRef Name="IDLoai" />
+    </Key>
+    <Property Name="IDLoai" Type="int" Nullable="false" />
+    <Property Name="Tentheloai" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Tintuc_Theloaitin">
+    <End Role="Theloaitin" Type="Self.Theloaitin" Multiplicity="0..1" />
+    <End Role="Tintuc" Type="Self.Tintuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Theloaitin">
+        <PropertyRef Name="IDLoai" />
+      </Principal>
+      <Dependent Role="Tintuc">
+        <PropertyRef Name="IDLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookStoreModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tintuc" EntityType="Self.Tintuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Theloaitin" EntityType="Self.Theloaitin" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Tintuc_Theloaitin" Association="Self.FK_Tintuc_Theloaitin">
+      <End Role="Theloaitin" EntitySet="Theloaitin" />
+      <End Role="Tintuc" EntitySet="Tintuc" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

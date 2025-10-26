@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tintuc">
+    <Key>
+      <PropertyRef Name="IdTin" />
+    </Key>
+    <Property Name="IdTin" Type="Int32" Nullable="false" />
+    <Property Name="IDLoai" Type="Int32" />
+    <Property Name="Tieudetin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Noidungtin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Theloaitin" Relationship="Self.FK_Tintuc_Theloaitin" FromRole="Tintuc" ToRole="Theloaitin" />
+  </EntityType>
+  <EntityType Name="Theloaitin">
+    <Key>
+      <PropertyRef Name="IDLoai" />
+    </Key>
+    <Property Name="IDLoai" Type="Int32" Nullable="false" />
+    <Property Name="Tentheloai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tintucs" Relationship="Self.FK_Tintuc_Theloaitin" FromRole="Theloaitin" ToRole="Tintuc" />
+  </EntityType>
+  <Association Name="FK_Tintuc_Theloaitin">
+    <End Role="Theloaitin" Type="Self.Theloaitin" Multiplicity="0..1" />
+    <End Role="Tintuc" Type="Self.Tintuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Theloaitin">
+        <PropertyRef Name="IDLoai" />
+      </Principal>
+      <Dependent Role="Tintuc">
+        <PropertyRef Name="IDLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookStoreEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tintucs" EntityType="Self.Tintuc" />
+    <EntitySet Name="Theloaitins" EntityType="Self.Theloaitin" />
+    <AssociationSet Name="FK_Tintuc_Theloaitin" Association="Self.FK_Tintuc_Theloaitin">
+      <End Role="Theloaitin" EntitySet="Theloaitins" />
+      <End Role="Tintuc" EntitySet="Tintucs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
